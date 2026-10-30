@@ -1,0 +1,169 @@
+{
+  "source_sha256": "8b3e6951ac3e94cd6e67cd73d5aadcbd2314ff47a3e1bb86e9ecca2fdbded132",
+  "table": "reward_table.bin",
+  "category": "pirates_driftage",
+  "nested_table_offset": 1137456,
+  "cash_status": "All money and money_end fields in this category are zero; direct pickup cash is not implemented.",
+  "edits": [
+    {
+      "row": "1",
+      "column": "11",
+      "item_id": 1916,
+      "item_name": "Components",
+      "offset": 1137724,
+      "format": "i",
+      "before": 3,
+      "after": 6
+    },
+    {
+      "row": "2",
+      "column": "11",
+      "item_id": 1917,
+      "item_name": "Quality Components",
+      "offset": 1137820,
+      "format": "i",
+      "before": 2,
+      "after": 4
+    },
+    {
+      "row": "3",
+      "column": "11",
+      "item_id": 2067,
+      "item_name": "Superb Components",
+      "offset": 1137916,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "4",
+      "column": "11",
+      "item_id": 1840,
+      "item_name": "Sharkstone",
+      "offset": 1138012,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "5",
+      "column": "11",
+      "item_id": 1702,
+      "item_name": "Squid Tentacles",
+      "offset": 1138108,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "6",
+      "column": "11",
+      "item_id": 1918,
+      "item_name": "Ethereal Egesta",
+      "offset": 1138204,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "7",
+      "column": "11",
+      "item_id": 1888,
+      "item_name": "Fishing Net",
+      "offset": 1138300,
+      "format": "i",
+      "before": 2,
+      "after": 4
+    },
+    {
+      "row": "8",
+      "column": "11",
+      "item_id": 2234,
+      "item_name": "Materials Net",
+      "offset": 1138396,
+      "format": "i",
+      "before": 2,
+      "after": 4
+    },
+    {
+      "row": "9",
+      "column": "11",
+      "item_id": 2511,
+      "item_name": "Mysterious Net",
+      "offset": 1138492,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "10",
+      "column": "11",
+      "item_id": 2067,
+      "item_name": "Superb Components",
+      "offset": 1138588,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "11",
+      "column": "11",
+      "item_id": 1840,
+      "item_name": "Sharkstone",
+      "offset": 1138684,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "12",
+      "column": "11",
+      "item_id": 1702,
+      "item_name": "Squid Tentacles",
+      "offset": 1138780,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "13",
+      "column": "11",
+      "item_id": 1918,
+      "item_name": "Ethereal Egesta",
+      "offset": 1138876,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "14",
+      "column": "11",
+      "item_id": 1857,
+      "item_name": "Bear Meat",
+      "offset": 1138972,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "15",
+      "column": "11",
+      "item_id": 1860,
+      "item_name": "Pheasant Meat",
+      "offset": 1139068,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "row": "16",
+      "column": "11",
+      "item_id": 1859,
+      "item_name": "Rabbit Meat",
+      "offset": 1139164,
+      "format": "i",
+      "before": 1,
+      "after": 2
+    }
+  ]
+}

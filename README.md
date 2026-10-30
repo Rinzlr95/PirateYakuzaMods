@@ -2,6 +2,35 @@
 
 Targets: 2x flotsam, 1.5x roaming enemy ship spawns, 3x money rewards.
 
+## Current focus: double flotsam pickup loot
+
+[Download the items-only test ZIP](downloads/FlotsamLoot2x-ItemsOnly-Test.zip)
+
+[Install and test instructions](INSTALL-FLOTSAM-LOOT.txt)
+
+This new candidate doubles 16 item quantity entries in the `pirates_driftage`
+reward category. Components change from 3 to 6, Quality Components from 2 to 4,
+and single-item rewards from 1 to 2. Spawn settings and reward odds are unchanged.
+Disable the earlier density experiment while testing this version.
+
+All direct `money` and `money_end` values in this flotsam category are zero.
+Cash is therefore left unchanged, as requested when no flotsam cash reward is
+identified. Doubling collected items can increase proceeds when those extra
+items are sold; unit selling prices are unchanged.
+
+The candidate passes byte-range checks, repeat-build checks, and independent
+reARMP decoding of the 16 edited quantities. It has not been run in the game.
+The entire `reward_table.bin` is a loose override, so it conflicts with other
+mods replacing that file even if they edit a different reward category.
+
+Rebuild with Python 3, using the exact inspected source archive:
+
+```
+python tools/build_flotsam_loot.py /path/to/db.spr.en.par /path/to/FlotsamLoot2x-ItemsOnly-Test.zip
+```
+
+## Earlier density experiment
+
 ## Download
 
 [Download Flotsam2x Experimental ZIP](downloads/Flotsam2x-Experimental.zip)
