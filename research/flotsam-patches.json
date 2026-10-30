@@ -1,0 +1,155 @@
+[
+  {
+    "file": "pirate_sea_ingame_parameter.bin",
+    "row": "max_driftage",
+    "column": "param_s",
+    "offset": 2564,
+    "format": "i",
+    "before": 30,
+    "after": 60
+  },
+  {
+    "file": "pirate_sea_ingame_parameter.bin",
+    "row": "min_spawn_time",
+    "column": "param_f",
+    "offset": 2656,
+    "format": "f",
+    "before": 7.0,
+    "after": 3.5
+  },
+  {
+    "file": "pirate_sea_ingame_parameter.bin",
+    "row": "max_spawn_time",
+    "column": "param_f",
+    "offset": 2640,
+    "format": "f",
+    "before": 10.0,
+    "after": 5.0
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "hawaii",
+    "column": "initial_spawn_num",
+    "offset": 8760,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "nere",
+    "column": "initial_spawn_num",
+    "offset": 8776,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "rich",
+    "column": "initial_spawn_num",
+    "offset": 8792,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "atlantis",
+    "column": "initial_spawn_num",
+    "offset": 8808,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "side_01",
+    "column": "initial_spawn_num",
+    "offset": 8824,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "side_02",
+    "column": "initial_spawn_num",
+    "offset": 8840,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "side_03",
+    "column": "initial_spawn_num",
+    "offset": 8856,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "hawaii_S",
+    "column": "initial_spawn_num",
+    "offset": 8872,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "nere_S",
+    "column": "initial_spawn_num",
+    "offset": 8888,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "rich_S",
+    "column": "initial_spawn_num",
+    "offset": 8904,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "atlantis_S",
+    "column": "initial_spawn_num",
+    "offset": 8920,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "side_01_S",
+    "column": "initial_spawn_num",
+    "offset": 8936,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "side_02_S",
+    "column": "initial_spawn_num",
+    "offset": 8952,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  },
+  {
+    "file": "pirate_sea_driftage.bin",
+    "row": "side_03_S",
+    "column": "initial_spawn_num",
+    "offset": 8968,
+    "format": "I",
+    "before": 20,
+    "after": 40
+  }
+]
