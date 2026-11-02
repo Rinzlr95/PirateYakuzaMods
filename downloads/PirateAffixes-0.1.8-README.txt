@@ -1,0 +1,112 @@
+PirateAffixes 0.1.8
+
+INSTALL / UPDATE
+Close the game. Replace PirateAffixes.asi and PirateAffixes.ini beside
+likeadragonpirates.exe in runtime\media. Alternatively merge the new keys
+and changed values into your customized INI. Keeping an old INI unchanged
+retains its old HP and regeneration settings. Restart after every INI edit.
+Keep old SRMM affix/name/stat prototypes disabled. The existing ASI loader
+loads this mod; an SRMM checkbox does not disable it. Leave dinput8.dll and
+YakuzaParless.asi unchanged. Keep the x10 money mod enabled if you use it.
+
+WHAT CHANGED
+Default affixed HP x2.5, Strong HP x6 total, Regen 3% max HP per game second.
+New Berserk trait: extra attack power below half HP; 10% independent chance.
+Berserk stops boosting when HP recovers to or above the threshold. It uses
+the existing attack-power stat and stacks multiplicatively with Strong.
+Archive and root folder are PirateAffixes-0.1.8, without InGameTest.
+
+INI REFERENCE - SAME ORDER AS THE FILE
+Blank lines and lines beginning with ; are comments and have no effect.
+[Affixes]
+  Section header. All the settings below must remain inside this section.
+StrongChance=0.20
+  Independent chance for Strong per spawned enemy. 0.20 means 20%.
+SpeedyChance=0.20
+  Independent chance for Speedy per spawned enemy. 0.20 means 20%.
+RegenChance=0.20
+  Independent chance for Regen per spawned enemy. 0.20 means 20%.
+BerserkChance=0.10
+  Independent chance for Berserk per spawned enemy. 0.10 means 10%.
+  Each chance accepts 0 to 1. Set a trait's chance to 0 to disable it.
+RegenPerSecond=0.03
+  Fraction of boosted maximum HP restored each unpaused game second.
+  0.03 means 3%, not 0.03%. Accepts 0 to 1. No healing after death.
+AffixHPMultiplier=2.5
+  Maximum/current HP scale for any affixed enemy WITHOUT Strong.
+  Preserves initial health percentage. Accepts 1 to 100, including decimals.
+StrongHPMultiplier=6.0
+  Total HP scale for any Strong enemy. Replaces AffixHPMultiplier; it does
+  not multiply it. Strong with any other traits still gets x6 HP by default.
+  Accepts 1 to 100, including decimals. Ordinary enemies keep their HP.
+StrongDamageMultiplier=3.0
+  Multiplier applied to the enemy's attack-power stat for Strong.
+  Actual damage still depends on game attack/defence calculations.
+  Accepts 0.1 to 10. 1 means no extra attack power from Strong.
+SpeedyAnimationMultiplier=3.5
+  Actual animation playback speed for Speedy enemies. 1 is normal speed.
+  Accepts 0.1 to 10. Does not intentionally speed up AI decision timers.
+BerserkDamageMultiplier=2.0
+  Extra attack-power factor while Berserk is active. Accepts 1 to 10.
+  Strong+Berserk below threshold gets 3 x 2 = x6 attack power by default;
+  above threshold it returns to Strong's x3. No HP multiplier is added.
+BerserkHealthThreshold=0.50
+  Berserk activates strictly below this fraction of current maximum HP.
+  0.50 means below 50%. Accepts 0.01 to 1. Healing above it deactivates boost.
+ShowHealthNumbers=1
+  1 shows current/max HP beside the enemy name above its health bar.
+  0 hides the numbers. These are not floating damage numbers or text inside
+  the red bar. Display updates at most 10 times per second.
+Missing or invalid numeric values use this version's defaults. Use decimal
+points, not commas. Put comments on separate lines, not after numeric values.
+
+TRAITS / COVERAGE
+Strong: orange name label, attack-power and HP boosts as configured.
+Speedy: blue label, configured animation speed.
+Regen: green label, configured health regeneration.
+Berserk: orange label, configured low-health attack-power boost.
+Two or more traits add purple Elite. Each trait rolls independently for
+eligible hostile runtime combat actors; no name, template or district list.
+Normal enemies, supported minibosses/bounties and bosses can receive traits.
+Player/proxy/friendly objects are excluded. Not every scripted boss layout
+has been tested. Lowering a chance does not reroll an already spawned actor.
+
+REWARDS
+Every trait, including Berserk, contributes base $500 on defeat.
+The installed money_050000 reward row supplies the cash value; the ASI
+multiplies it by trait count and requests ONE combined trait cash pickup.
+Traits      Base table        Uploaded x10 table
+1           $500              $5,000
+2           $1,000            $10,000
+3           $1,500            $15,000
+4           $2,000            $20,000
+Original cash and items stay separate. Elites and bosses/minibosses receive
+an existing level-1 STA medicine attempt when no original/pending item exists.
+A guaranteed enemy without cash or a trait bonus gets the existing smallest
+cash row. The uploaded x10 table legitimately contains $30/$50 ordinary drops.
+No database replacement or second x10 multiplier is applied by this ASI.
+
+VALIDATION / LOG
+Windows Steam 1.14 only; supported EXE MD5:
+D4AA289CF4294F507BF20D3CE2FAEB16.
+Other EXEs/changed hook targets disable this mod before hooks are enabled.
+The user confirmed the earlier traits, numeric HP and encounter coverage.
+Berserk and this balance change require in-game validation. Compilation,
+recorded layout checks, all 16 trait masks, low-health threshold/stacking/
+recovery and cash totals are checked locally. No Windows game runs here.
+PirateAffixes.log appears beside the ASI and appends each launch. Check the
+0.1.8 startup/settings, berserk active=1/0, hp_applied, animation_speed_applied,
+cash_spawn and defeat records. Trait flags: Strong 1, Speedy 2, Regen 4,
+Berserk 8; combined flags are sums. HP text reports actual sampled health;
+bar animation may catch up separately. Base $500 per trait is not editable.
+
+REMOVE
+Close the game and remove or rename PirateAffixes.asi to .asi.disabled.
+No original archives or saves are edited. Existing immutable name buffers
+and native strings remain valid until process exit.
+
+CREDITS
+Thanks to ShinRyuModManager, Parless and community modding-tool developers,
+Tsuda Kageyu for MinHook (source and license included), and you for captures,
+logs and testing. DragonEngine.NET was consulted as a reference; it is not
+a runtime dependency or proof of compatibility.
