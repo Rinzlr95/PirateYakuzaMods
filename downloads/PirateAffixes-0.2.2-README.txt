@@ -1,0 +1,188 @@
+PirateAffixes 0.2.2
+
+INSTALL / UPDATE
+For an update from 0.2.1, replace ONLY the ASI and retain your customized INI.
+For a first installation: close the game. Place PirateAffixes.asi and PirateAffixes.ini beside
+likeadragonpirates.exe in runtime\media, or merge all new keys into your
+customized INI. Keep earlier SRMM affix/name/stat prototypes disabled.
+The existing ASI loader loads this file. An SRMM checkbox does not disable it.
+Leave dinput8.dll and YakuzaParless.asi unchanged; keep your x10 money mod.
+
+LAYOUT CHANGES IN 0.2.2
+Settings layout only; no gameplay/default/INI changes from 0.2.1.
+
+PREVIOUS BALANCE CHANGES IN 0.2.1
+Heavyweight now gets x6 total HP, x1.5 attack power (half the default Strong
+x3), and x0.5 animation playback. All three have their own settings/panel.
+Strong+Heavyweight uses the higher HP scale and Strong's attack power;
+these two HP/power boosts do not multiply each other. Berserk still stacks.
+Enraged now approaches x4 extra speed as HP falls (x2.5 at half HP).
+Volatile has a NEW x5 baseline factor before the existing user multiplier.
+With VolatileDamageMultiplier=5, this is five times the old build at 5:
+native damage x5 baseline x5 user = x25 native, versus old x5 native.
+The shipped user multiplier is 5 to match the tested setting. Lower it if
+needed. Native owner/target defence rules still determine damage received.
+Rewards, probabilities, blast radius/delay and colors unchanged.
+
+TRAITS
+Enraged: gains animation speed gradually as HP falls, but takes more damage.
+The speed and incoming-damage tradeoff scale linearly with missing health.
+Heavyweight: native super/hard armor resists hit reactions/knockdown/launches;
+slower animation playback. Does not enable the invulnerability flag. Special
+scripted reactions/throws may still override armor. Movement uses stock AI.
+Volatile: queues a fire-barrage explosion 1.5 game seconds after defeat, using
+the native attack wrapper and existing boss_skill_barrage_fire particle.
+Default blast radius is 5 world units versus the stock attack's 3. This is a
+wider damage area, not a separately scaled particle animation. It can hurt
+nearby targets according to stock faction and damage rules. Move away from
+a defeated Volatile enemy. Its pre-defeat trait label identifies the hazard;
+there is no additional ground-warning decal/countdown. If its actor unloads
+before detonation the blast is skipped and logged. Blast scheduling uses
+stock UI/animation callbacks on the recorded gameplay thread. Last-enemy
+kills, pause/cutscenes and scripted immunity need in-game checks.
+
+LIVE SETTINGS PANEL / HP TOGGLE
+F8 opens/closes a native Windows panel owned by the mod, over the game.
+It is not drawn into the DirectX frame. Borderless/windowed mode recommended;
+exclusive fullscreen may minimize or hide the game when the panel takes focus.
+F7 toggles current/max HP numbers. Hotkeys require focus on this game/panel.
+Use General plus individual Strong, Speedy, Regen, Berserk, Enraged,
+Heavyweight and Volatile pages. Each trait page groups its chance and effects.
+The window is taller, starts lower on the active monitor, and stays within
+the monitor work area. Two rows of buttons replace the broad category tabs.
+Header instructions have more room and slider rows have wider spacing.
+Changes apply and save to the INI immediately; no restart required for panel
+changes. The panel does NOT pause the game. Chance and HP multiplier changes
+apply to newly spawned enemies, without rerolling/refilling existing enemies.
+Power, animation, regeneration, blast settings and HP display update live.
+Already queued blasts retain their original remaining delay. Settings apply
+at the next callback and numbers refresh at most 10 times per second.
+If you edit the INI manually, restart the game to load those edits. Do not edit
+the INI simultaneously with panel changes, since the panel writes its values.
+
+INI REFERENCE - SAME ORDER AS THE FILE
+[Affixes]
+  Section header for every setting below. Lines beginning with ; are comments.
+StrongChance=0.20
+  Independent 20% chance per eligible enemy. Accepts 0 to 1; 0 disables trait.
+SpeedyChance=0.20
+  Independent 20% Speedy chance. Accepts 0 to 1.
+RegenChance=0.20
+  Independent 20% Regen chance. Accepts 0 to 1.
+BerserkChance=0.10
+  Independent 10% Berserk chance. Accepts 0 to 1.
+EnragedChance=0.10
+  Independent 10% Enraged chance. Accepts 0 to 1.
+HeavyweightChance=0.10
+  Independent 10% Heavyweight chance. Accepts 0 to 1.
+VolatileChance=0.08
+  Independent 8% Volatile chance. Accepts 0 to 1.
+RegenPerSecond=0.03
+  Fraction of boosted maximum HP restored per unpaused game second.
+  0.03 means 3%. Accepts 0 to 1. Never resurrects dead enemies.
+AffixHPMultiplier=2.5
+  Total maximum/current HP scale for affixed enemies WITHOUT Strong or
+  Heavyweight.
+  Initial health percentage is preserved. Accepts 1 to 100, decimals allowed.
+StrongHPMultiplier=6.0
+  Total HP scale for Strong. Replaces, rather than multiplies, the value above.
+  Strong with other traits still gets x6 total HP. Accepts 1 to 100.
+HeavyweightHPMultiplier=6.0
+  Total HP scale for Heavyweight. Accepts 1 to 100. With Strong, use whichever
+  of StrongHPMultiplier/HeavyweightHPMultiplier is higher; do not multiply.
+StrongDamageMultiplier=3.0
+  Strong's attack-power multiplier. Accepts 0.1 to 10. Final damage still
+  depends on game attack/defence calculations.
+HeavyweightDamageMultiplier=1.5
+  Heavyweight attack-power factor, half Strong's default x3. Accepts 0.1 to
+  10. Strong takes precedence if both traits are present. Berserk multiplies
+  the resulting factor below its threshold. Independent setting, not linked
+  automatically to later edits of StrongDamageMultiplier.
+SpeedyAnimationMultiplier=3.5
+  Speedy's animation playback multiplier. Accepts 0.1 to 10; 1 is normal.
+BerserkDamageMultiplier=2.0
+  Extra attack-power multiplier while Berserk is below its threshold.
+  Accepts 1 to 10. Stacks with Strong: defaults give x6 attack power below
+  threshold for Strong+Berserk. Reverts to Strong's x3 when HP recovers.
+BerserkHealthThreshold=0.50
+  Activate Berserk strictly below this fraction of maximum HP. 0.50=50%.
+  Accepts 0.01 to 1. At/above threshold the extra boost switches off.
+EnragedMaxAnimationMultiplier=4.0
+  Enraged's maximum extra playback factor as HP approaches zero. At half HP,
+  default factor is x2.5; full HP is x1. Accepts 1 to 5.
+  Stacks with Speedy and Heavyweight; combined playback is capped at x10.
+EnragedMaxIncomingDamageMultiplier=1.5
+  Maximum incoming-damage factor as HP approaches zero. Default 1.5 gives up
+  to 50% extra damage taken, with 25% extra at half HP. Accepts 1 to 5.
+  1 disables this tradeoff. Uses the native defence-damage ratio field.
+HeavyweightAnimationMultiplier=0.50
+  Slower playback factor for Heavyweight. Accepts 0.1 to 1. Native armor
+  remains enabled at 1; this only controls slowdown, not armor strength.
+VolatileDelaySeconds=1.5
+  Game-time delay from defeat before creating the blast. Accepts 0.25 to 10.
+VolatileRadius=5.0
+  Native world-unit blast radius, versus this attack's stock radius of 3.
+  Accepts 1 to 10. Overrides only this mod's new blast instance.
+VolatileBaseDamageMultiplier=5.0
+  New baseline boost before VolatileDamageMultiplier. Accepts 0.1 to 20.
+  5 makes the same user slider value deal five times the old build's damage.
+VolatileDamageMultiplier=5.0
+  User factor applied after native owner adjustments and the new baseline.
+  Accepts 0.1 to 5. Default 5 with baseline 5 is x25 native damage; the row
+  base is 300 before native adjustments. 1 retains only the baseline factor.
+ShowHealthNumbers=1
+  1 shows current/max HP beside the enemy name ABOVE its red bar; 0 hides it.
+  Also controlled by F7 and the panel checkbox. Not floating damage numbers.
+Missing/invalid numeric values use version defaults. Use decimal points,
+not commas. Comments must be on separate lines. Existing chance/HP settings
+cannot remove traits or change initial HP on already spawned enemies.
+
+COVERAGE / LABELS / REWARDS
+Seven independent per-spawn rolls for eligible hostile on-foot combat actors.
+No name, template or district whitelist; supported normal enemies, minibosses,
+bounties and bosses can receive traits. Player/proxy/friendly objects excluded.
+Not every scripted boss/component layout has been tested.
+Two or more traits add purple Elite. Strong/Berserk/Enraged/Volatile use orange
+labels, Speedy/Heavyweight blue, Regen green. Long combinations can crowd names.
+Every trait contributes base $500, including all three new ones. The installed
+money_050000 reward row is resolved once; trait count multiplies its amount
+into ONE combined trait cash pickup. No second x10 multiplier is added.
+Trait count    Base table    Uploaded x10 table
+1              $500          $5,000
+2              $1,000        $10,000
+3              $1,500        $15,000
+4              $2,000        $20,000
+5              $2,500        $25,000
+6              $3,000        $30,000
+7              $3,500        $35,000
+Original money/items stay separate. Elites/bosses/minibosses missing an
+original/pending item get an existing level-1 STA medicine attempt. Guaranteed
+enemies without cash/trait bonus get the smallest existing cash row. The x10
+table legitimately includes $30/$50 ordinary drops. No DB replacement.
+
+VALIDATION / LOG / ROLLBACK
+Windows Steam 1.14 EXE MD5 D4AA289CF4294F507BF20D3CE2FAEB16 only.
+Changed EXE/hook target bytes disable the mod before hooks enable.
+The user confirmed Volatile produces a molotov-like effect. Earlier traits,
+numeric HP and encounter coverage were tested by the user. This balance
+update needs in-game testing. Panel behavior and all scripted cases have not
+been independently verified here.
+Local checks cover all 128 trait masks, stacked cash totals, Berserk threshold/
+recovery, Enraged/Heavyweight playback combinations, recorded actor layouts,
+native blast wrapper/copy fields, armor labels and INI/panel/docs parity.
+There is no Windows game runtime available here, so these are not in-game tests.
+PirateAffixes.log appears beside the ASI and appends each launch. Look for
+0.2.2 initialization, Settings ready, heavyweight_applied, volatile_armed,
+volatile_explosion/volatile_skipped, berserk, hp_applied and cash_spawn.
+Flags: Strong 1, Speedy 2, Regen 4, Berserk 8, Enraged 16, Heavyweight 32,
+Volatile 64; combined flags are sums. Check the version when sharing logs.
+To remove: close game, remove/rename PirateAffixes.asi to .asi.disabled.
+No original archives or saves are edited. Native name buffers are retained
+until process exit; expired actor records are collected when unused.
+
+CREDITS
+Thanks to ShinRyuModManager, Parless and community modding-tool developers,
+Tsuda Kageyu for MinHook (source/license included), and you for captures,
+logs and testing. DragonEngine.NET was consulted as a reference, not used
+as a runtime dependency or proof of Pirate Yakuza compatibility. The settings
+panel uses standard Windows controls; no additional UI library is required.
