@@ -1,0 +1,78 @@
+PirateAffixes 0.1.6 - STRONGER TRAITS TEST BUILD
+
+CHANGES IN 0.1.6
+Speedy defaults to x3.5 animation playback. The INI now exposes:
+AffixHPMultiplier=5.0 (HP for affixed enemies without Strong)
+StrongHPMultiplier=10.0 (total HP for Strong, not multiplied by the above)
+StrongDamageMultiplier=3.0 (the existing attack-power ratio)
+SpeedyAnimationMultiplier=3.5
+ShowHealthNumbers=1 (current/max HP text beside the name above the bar;
+set 0 to hide). Updates at most 10 times per second. This uses the existing
+name text widget, not new text inside the red bar. No floating damage numbers.
+Regen remains 0.05. Chances and rewards unchanged. Restart after INI edits.
+Replace ASI and INI, or merge the new keys into your customized INI.
+The uploaded x10 reward table has money_0300=3000 internal units=$30, versus
+300=$3 in the original table. Small ordinary drops do not establish conflict.
+The initial bar fill may be UI interpolation; compare actual HP text with
+bar fill. Do not repeatedly refill HP or overwrite unknown UI caches.
+Numeric UI behavior still requires in-game validation.
+
+STATUS
+The user confirmed 0.1.2 displays traits and pays base $500 with the x10 mod
+removed, and $5,000 with it enabled. This build changes trait strengths only.
+The stronger values have not yet been tested in game.
+
+INSTALL / UPDATE
+Close the game. Replace PirateAffixes.asi beside likeadragonpirates.exe in
+runtime\media. Replace the INI, or set RegenPerSecond=0.05 in your existing INI.
+Keep previous SRMM affix/name/stat prototypes disabled and the x10 money mod
+active. Leave dinput8.dll and YakuzaParless.asi unchanged. This ASI is loaded
+by the existing ASI loader, not an SRMM checkbox.
+Supported executable: Windows Steam 1.14, MD5
+D4AA289CF4294F507BF20D3CE2FAEB16. Other builds or altered hook target code
+are rejected before hooks are enabled.
+
+TRAITS
+Each hostile runtime combat actor gets independent 20% Strong, Speedy and
+Regen rolls. There is no name, template or district whitelist. About 51.2%
+of enemies should remain ordinary. Two or more traits add purple Elite.
+Strong: orange; power ratio x3, maximum HP x10 with HP ratio preserved.
+Speedy: blue; actual animation playback speed x3.5.
+Regen: green; 5% max HP per engine game second, capped, no resurrection.
+Pause behavior still needs an in-game check.
+Player/proxy/friendly objects are excluded using the captured control/faction/
+gauge layout. All scripted boss layouts have not been tested.
+
+REWARDS
+Each trait adds one existing money_050000 entry (reward row 244), once per
+actor defeat. The original entry is 50,000 internal units; the uploaded x10
+entry is 500,000. No extra multiplier or database replacement is applied.
+Original drops remain. Elites and bosses/minibosses that have no original or
+pending item receive one existing level-1 STA medicine attempt (item 3292).
+If a guaranteed enemy has no cash and no trait bonus, the existing money_0300
+entry is used as fallback. This is 300 internal units in the base table,
+3,000 in the uploaded x10 table, rather than a base $300 as previously stated.
+Drops use stock ground-loot functions; successful inventory/cash pickup and
+all scripted encounter restrictions still require in-game validation.
+
+LOG / TEST
+PirateAffixes.log is written beside the ASI and appends across launches.
+Look for the 0.1.6 startup line, then label_set records with names and traits.
+cash_spawn phase=trait_bonus records the exact internal cash amount sent to
+the game. The defeat record shows actual_bonus_units and the measured table
+multiplier. With the supplied x10 table the multiplier should be 10.000.
+hp_applied, animation_speed_applied, strong_applied and regen_applied record actual stat/health readbacks.
+Send the new log and report the total cash gained from a trait enemy; a single
+bag may not represent the total reward when the game splits a drop.
+
+REMOVE / ROLLBACK
+Close the game and remove or rename PirateAffixes.asi to
+PirateAffixes.asi.disabled. No original archive or save file is edited.
+Name buffers and native string buffers are retained until process exit to
+avoid dangling text pointers. Expired actor identity records are cleaned up.
+
+CREDITS
+Thanks to the ShinRyuModManager, Parless and community modding-tool developers,
+to Tsuda Kageyu for MinHook (license and source included), and to you for the
+captures, logs and testing. DragonEngine.NET was consulted as a reference;
+it is not a runtime dependency or proof of Pirate Yakuza compatibility.
