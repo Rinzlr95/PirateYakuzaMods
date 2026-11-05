@@ -1,6 +1,6 @@
 # Pirate Yakuza gameplay mod investigation
 
-Targets: 2x flotsam, 1.5x roaming enemy ship spawns, 3x money rewards.
+Targets: 2x flotsam
 
 ## Current focus: double flotsam pickup loot
 
