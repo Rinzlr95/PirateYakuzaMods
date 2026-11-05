@@ -16,17 +16,25 @@ Random traits for on-foot enemies, minibosses, bounties and bosses. Two or more 
 
 ### Install
 
-1. Install **ShinRyuModManager with Parless** and its ASI loader.
-2. With the game closed, copy `PirateAffixes.asi` and `PirateAffixes.ini` beside `likeadragonpirates.exe` in `runtime\media`.
-3. Disable any older affix prototypes, then launch the game.
+1. Install **ShinRyuModManager with Parless**.
+2. With the game closed, extract the mod folder into `runtime\media\mods`. Both files should be here:
 
-Requires the supported Windows Steam 1.14 build; English game text. The ASI loader loads this mod directly, rather than an SRMM mod-folder checkbox.
+   ```text
+   runtime\media\mods\PirateAffixes\PirateAffixes.asi
+   runtime\media\mods\PirateAffixes\PirateAffixes.ini
+   ```
+
+3. Enable **PirateAffixes** in ShinRyuModManager, regenerate the load order, and launch the game.
+
+If updating from a manual install, remove the old `PirateAffixes.asi` beside the game EXE so it cannot load twice. Disable older affix prototypes.
+
+Requires the supported Windows Steam 1.14 build; English game text.
 
 **F8** opens settings. **F7** toggles HP numbers. Use borderless/windowed mode. The settings panel does not pause the game.
 
 Settings save to the INI. Chance and HP changes affect new enemies; other settings update live. Reward values and drop chance are under General. Defaults are $500 per trait and 100% drop chance, combined into one cash pickup. Works with the tested x10 money-drop table. Original drops stay unchanged.
 
-To remove, close the game and delete or rename `PirateAffixes.asi`.
+To remove, close the game, disable PirateAffixes in ShinRyuModManager and regenerate the load order. You can then delete its folder from `mods`.
 
 ## Flotsam mods
 
