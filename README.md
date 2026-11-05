@@ -16,17 +16,9 @@ Random traits for on-foot enemies, minibosses, bounties and bosses. Two or more 
 
 ### Install
 
-1. Install **ShinRyuModManager with Parless**.
-2. With the game closed, extract the mod folder into `runtime\media\mods`. Both files should be here:
-
-   ```text
-   runtime\media\mods\PirateAffixes\PirateAffixes.asi
-   runtime\media\mods\PirateAffixes\PirateAffixes.ini
-   ```
-
-3. Enable **PirateAffixes** in ShinRyuModManager, regenerate the load order, and launch the game.
-
-If updating from a manual install, remove the old `PirateAffixes.asi` beside the game EXE so it cannot load twice. Disable older affix prototypes.
+1. Install **ShinRyuModManager** into the game folder.
+2. With the game closed, place the mod ZIP into `runtime\media\mods`. 
+3. Enable **PirateAffixes** in ShinRyuModManager, regenerate the load order and save it, and launch the game.
 
 Requires the supported Windows Steam 1.14 build; English game text.
 
@@ -38,7 +30,7 @@ To remove, close the game, disable PirateAffixes in ShinRyuModManager and regene
 
 ## Flotsam mods
 
-**FlotsamLoot2x** doubles items collected from floating crates. Spawn rates, loot chances and selling prices stay unchanged. Use ShinRyuModManager/Parless, place the included mod folder in `runtime\media\mods`, enable it, regenerate the load order and restart. Conflicts with other `db.spr.en\reward_table.bin` overrides.
+**FlotsamLoot2x** doubles items collected from floating crates. Spawn rates, loot chances and selling prices stay unchanged. Use ShinRyuModManager, place the included mod folder in `runtime\media\mods`, enable it, regenerate the load order and restart. Conflicts with other `db.spr.en\reward_table.bin` overrides.
 
 The earlier **Flotsam2x Experimental** changes spawn density instead. Its overrides are `pirate_sea_ingame_parameter.bin` and `pirate_sea_driftage.bin`.
 
