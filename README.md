@@ -1,89 +1,92 @@
-# Pirate Yakuza gameplay mod investigation
+# Pirate Yakuza Mods
 
-Targets: 2x flotsam
+Source for **Cursed Encounters - Pirate Affixes** and the flotsam mods.
 
-## Current focus: double flotsam pickup loot
+## Pirate Affixes
 
-[Download the items-only test ZIP](downloads/FlotsamLoot2x-ItemsOnly-Test.zip)
+Random traits for on-foot enemies, minibosses, bounties and bosses. Two or more traits add the **Elite** title.
 
-[Install and test instructions](INSTALL-FLOTSAM-LOOT.txt)
+- **Strong:** more HP and harder hits.
+- **Speedy:** faster animations.
+- **Regen:** heals over time.
+- **Berserk:** harder hits below its health threshold.
+- **Enraged:** faster at low HP, but takes more damage.
+- **Heavyweight:** tougher and slower, with armor against hit reactions.
+- **Volatile:** a delayed fiery explosion after defeat.
 
-This new candidate doubles 16 item quantity entries in the `pirates_driftage`
-reward category. Components change from 3 to 6, Quality Components from 2 to 4,
-and single-item rewards from 1 to 2. Spawn settings and reward odds are unchanged.
-Disable the earlier density experiment while testing this version.
+### Install
 
-All direct `money` and `money_end` values in this flotsam category are zero.
-Cash is therefore left unchanged, as requested when no flotsam cash reward is
-identified. Doubling collected items can increase proceeds when those extra
-items are sold; unit selling prices are unchanged.
+1. Install **ShinRyuModManager with Parless** and its ASI loader.
+2. With the game closed, copy `PirateAffixes.asi` and `PirateAffixes.ini` beside `likeadragonpirates.exe` in `runtime\media`.
+3. Disable any older affix prototypes, then launch the game.
 
-The candidate passes byte-range checks, repeat-build checks, and independent
-reARMP decoding of the 16 edited quantities. It has not been run in the game.
-The entire `reward_table.bin` is a loose override, so it conflicts with other
-mods replacing that file even if they edit a different reward category.
+Requires the supported Windows Steam 1.14 build; English game text. The ASI loader loads this mod directly, rather than an SRMM mod-folder checkbox.
 
-Rebuild with Python 3, using the exact inspected source archive:
+**F8** opens settings. **F7** toggles HP numbers. Use borderless/windowed mode. The settings panel does not pause the game.
 
-```
-python tools/build_flotsam_loot.py /path/to/db.spr.en.par /path/to/FlotsamLoot2x-ItemsOnly-Test.zip
-```
+Settings save to the INI. Chance and HP changes affect new enemies; other settings update live. Reward values and drop chance are under General. Defaults are $500 per trait and 100% drop chance, combined into one cash pickup. Works with the tested x10 money-drop table. Original drops stay unchanged.
 
-## Earlier density experiment
+To remove, close the game and delete or rename `PirateAffixes.asi`.
 
-## Download
+## Flotsam mods
 
-[Download Flotsam2x Experimental ZIP](downloads/Flotsam2x-Experimental.zip)
+**FlotsamLoot2x** doubles items collected from floating crates. Spawn rates, loot chances and selling prices stay unchanged. Use ShinRyuModManager/Parless, place the included mod folder in `runtime\media\mods`, enable it, regenerate the load order and restart. Conflicts with other `db.spr.en\reward_table.bin` overrides.
 
-On the ZIP page, click **Download raw file** to download it.
-See [installation instructions](INSTALL-FLOTSAM.txt). This is an untested
-flotsam-only candidate; money and enemy-ship changes are not included.
+The earlier **Flotsam2x Experimental** changes spawn density instead. Its overrides are `pirate_sea_ingame_parameter.bin` and `pirate_sea_driftage.bin`.
 
-## Available candidate
+Build either ZIP with Python 3 and your own `db.spr.en.par`:
 
-Flotsam2x-Experimental changes 17 fields in two loose English database tables.
-See INSTALL-FLOTSAM.txt for installation, limitations, test procedure and removal.
-The game has not been run here. Enemy ships and money are not included yet.
-
-Build with Python 3 (no packages required):
-
-```
-python tools/build_flotsam.py /path/to/db.spr.en.par /path/to/Flotsam2x-Experimental.zip
+```sh
+python Flotsam/build_flotsam_loot.py /path/to/db.spr.en.par FlotsamLoot2x.zip
+python Flotsam/build_flotsam.py /path/to/db.spr.en.par Flotsam2x.zip
 ```
 
-The builder rejects archives whose SHA-256 differs from the inspected upload.
-It preserves original table lengths and all bytes outside the manifest's fields.
-Do not add source game archives or extracted database dumps to version control.
+The builders check the supported archive hash before patching. Game files are not included.
 
-## Evidence and remaining investigation
+<details>
+<summary>Build instructions and source details for Nexus review</summary>
 
-- All 1,424 PAR entries were extracted and checked against declared sizes.
-- Both flotsam tables use Dragon Engine ARMP v2, structured storage.
-- An independent reARMP reader confirmed all 17 baseline values.
-- Build verification checks expected original values, edited byte ranges,
-  output ZIP integrity, and the exact stored table payloads.
-- Visible in-game density, timing ownership, SRMM loading, and performance
-  still require a Windows game test.
-- `reward_table_items.bin` names the money and money_end fields at structure
-  offsets 8 and 52. These correspond to unnamed nested reward_table columns
-  4 and 19. Only six reward_table rows have positive amounts there, so changing
-  them would not establish a universal 3x money reward modifier.
-- Other money sources include pirate_treasure_list.money, coliseum base_money,
-  and character_npc_soldier_reward_item.money. Costs also use 'money' fields;
-  blindly multiplying all matching names would change prices.
-- Ship status reward fields are small IDs associated with reward tables.
-  They must not be treated as direct cash amounts.
-- No confirmed roaming enemy-ship population setting was found in this archive.
-  Next small candidates to inspect: lua.par and
-  stage_ngen/st_pirate_hawaii_sea.par. The larger entity_spr.par may be relevant
-  later, but is not necessary to upload at this stage.
+### Build 0.2.3
 
-## Format references
+Download **Zig 0.14.1** from [ziglang.org/download](https://ziglang.org/download/). MinHook is included; no game files or extra libraries are needed to compile.
 
-- https://github.com/Kaplas80/ParManager (PAR and SLLZ v2)
-- https://github.com/Ret-HZ/LibARMP (ARMP structures)
-- https://github.com/Ret-HZ/reARMP (independent read-only verification)
-- https://github.com/TheTrueColonel/ShinRyuModManager-CE
-  (loose-file mod paths mirror data; extracted PAR directories omit .par)
+Clone this repository, then build on Windows:
 
-The repository includes the builder, patch manifest, and packaged test ZIP.
+```powershell
+git clone https://github.com/Rinzlr95/PirateYakuzaMods.git
+cd PirateYakuzaMods\PirateAffixes
+powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1 -Zig 'C:\Tools\zig-0.14.1\zig.exe'
+```
+
+Replace the Zig path with your extracted `zig.exe`. `Bypass` applies only to this PowerShell process. Output: `PirateAffixes/build/PirateAffixes.asi`. The script prints its SHA-256.
+
+On Linux, from `PirateAffixes/`:
+
+```sh
+ZIG=/absolute/path/to/zig sh build.sh
+sha256sum build/PirateAffixes.asi
+```
+
+The Linux cross-build matches the original 0.2.3 ASI byte for byte:
+
+```text
+8aa0783a3a7f8506a8af2d4c657ac5095575fe471613aa15168a9d7914438174
+```
+
+The Windows script uses the same flags but has not been run here. `build.sh` and `build.ps1` contain the full compiler commands. To run the calculation tests on Windows:
+
+```powershell
+C:\Tools\zig-0.14.1\zig.exe cc -std=c11 affix_logic_tests.c -o build\affix_logic_tests.exe
+.\build\affix_logic_tests.exe
+```
+
+### For reviewers
+
+`PirateAffixes.c` contains the runtime hooks; `affix_logic.h` contains trait calculations; `settings_panel.h` contains the UI; `target_signatures.h` checks game functions. MinHook source and its licence are in `PirateAffixes/minhook/`.
+
+The ASI hooks and reads/writes its own game process, calls native game effects/reward functions, checks the game EXE's MD5, and writes its INI/log beside the ASI. It has no network or updater code. It does not modify game archives. The compiled C sources match the original 0.2.3 release.
+
+
+</details>
+
+Thanks to ShinRyuModManager, Parless, Tsuda Kageyu for MinHook, the community tool developers, and everyone who helped test the mods. DragonEngine.NET was consulted as a reference.
